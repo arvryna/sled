@@ -1,8 +1,6 @@
 package db
 
 import (
-	"log"
-
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -16,9 +14,6 @@ func Init() *gorm.DB {
 	// open connection:
 	if err != nil {
 		panic(err)
-	} else {
-		// Use a better logging tool, eg: Logrus
-		log.Println("DB is initialized!")
 	}
 
 	// WARN: remove this in prod
