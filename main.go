@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/arvpyrna/sled/internal/db"
+	"github.com/schollz/progressbar/v3"
 )
 
 func showOptions() {
@@ -27,14 +29,27 @@ func getInput() {
 		switch id {
 		case 1:
 		case 2:
+			startTimer(3)
 		case 3:
 		case 4:
 		case 5:
 		case 6:
-		case 7:
+		case 9:
 			performCleanup()
 			os.Exit(0)
 		}
+	}
+}
+
+// Timer with interactive progress bar
+// Gets input in minute but shows progress bar in the unit of seconds
+func startTimer(minutes int) {
+	durationInSec := minutes * 60
+	fmt.Println(fmt.Sprintf("Timer starting for %d minutes", minutes))
+	bar := progressbar.Default(int64(durationInSec))
+	for i := 0; i < durationInSec; i++ {
+		bar.Add(1)
+		time.Sleep(1 * time.Second)
 	}
 }
 
