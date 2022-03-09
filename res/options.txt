@@ -1,5 +1,3 @@
-Please choose an options:
-
 1) Create category
 2) Track task
 3) Search
