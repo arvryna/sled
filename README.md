@@ -2,6 +2,7 @@
 - Interactive CLI for time tracking
 - Ability to track time with a timer
 - Provides a way to create and manage timesheet to share with your employers
+- Followed Clean architecture
 
 ## Features:
 - Export data as JSON / CSV

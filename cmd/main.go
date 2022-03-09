@@ -8,18 +8,9 @@ import (
 	"github.com/arvpyrna/sled/internal/handler"
 )
 
-func showOptions() {
-	options, err := os.ReadFile("res/options.txt")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(string(options))
-	fmt.Printf("\nChoose an option: ")
-}
-
 func getInput() {
 	for {
-		showOptions()
+		handler.ShowOptions()
 		var id int
 		_, err := fmt.Scanf("%d", &id)
 		if err != nil {

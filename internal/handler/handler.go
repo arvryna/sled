@@ -9,6 +9,15 @@ import (
 	"github.com/schollz/progressbar/v3"
 )
 
+func ShowOptions() {
+	options, err := os.ReadFile("res/options.txt")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(options))
+	fmt.Printf("\nChoose an option: ")
+}
+
 func HandleTaskCreation() {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter task Title: ")
