@@ -1,3 +1,5 @@
+# --------------- SLED USER MANUAL -----------------
+
 # Config
 - In config one can provide various options like sending email via SMTP
 

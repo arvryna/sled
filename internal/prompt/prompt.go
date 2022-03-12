@@ -24,13 +24,18 @@ func NewPrompt(dao repository.DAO) Prompt {
 }
 
 const OPTIONS_PATH = "res/options.txt"
+const USER_MANUAL_PATH = "res/manual.txt"
 
-func showOptions() {
-	options, err := os.ReadFile(OPTIONS_PATH)
+func getContentsOfFile(filePath string) string {
+	options, err := os.ReadFile(filePath)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(string(options))
+	return string(options)
+}
+
+func showOptions() {
+	fmt.Println("\n" + getContentsOfFile(OPTIONS_PATH))
 	fmt.Printf("\nChoose an option: ")
 }
 
@@ -48,9 +53,11 @@ func (p *prompt) ProcessUserInput() {
 		case 2:
 			p.handler.HandleTaskCreation()
 		case 3:
+			p.handler.PrintTasks()
 		case 4:
 		case 5:
 		case 6:
+			fmt.Println(getContentsOfFile(USER_MANUAL_PATH))
 		case 0:
 			p.handler.PerformCleanup()
 			os.Exit(0)

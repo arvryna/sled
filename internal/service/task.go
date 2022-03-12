@@ -7,7 +7,7 @@ import (
 
 type TaskService interface {
 	CreateTask(task model.Task)
-	ListTask()
+	ListTask() []model.Task
 }
 
 // Service holds the reference to DAO to access database
@@ -23,6 +23,6 @@ func (t *taskService) CreateTask(task model.Task) {
 	t.dao.NewTaskQuery().CreateTask(task)
 }
 
-func (t *taskService) ListTask() {
-
+func (t *taskService) ListTask() []model.Task {
+	return t.dao.NewTaskQuery().ListTasks()
 }

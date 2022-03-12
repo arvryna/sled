@@ -16,6 +16,7 @@ import (
 
 type Handler interface {
 	HandleTaskCreation()
+	PrintTasks()
 	PerformCleanup()
 }
 
@@ -52,6 +53,19 @@ func (h *handler) HandleTaskCreation() {
 	}
 
 	taskService.CreateTask(task)
+}
+
+func (h *handler) PrintTasks() {
+	results := service.NewTaskService(h.dao).ListTask()
+	if len(results) > 0 {
+		fmt.Println("\n----- Task List -----")
+	} else {
+		return
+	}
+	for _, task := range results {
+		fmt.Print(fmt.Sprintf("\n%d-%s", task.Id, task.Title))
+	}
+	fmt.Println("\n----- End -----")
 }
 
 func (h *handler) PerformCleanup() {
