@@ -12,8 +12,6 @@ import (
 	"github.com/schollz/progressbar/v3"
 )
 
-// Handler, perfroms user request, passed it on to relevant service
-
 type Handler interface {
 	HandleTaskCreation()
 	PrintTasks()

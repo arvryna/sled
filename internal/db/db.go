@@ -10,7 +10,6 @@ func Init() *gorm.DB {
 	// TODO: move this to config
 	db, err := gorm.Open(sqlite.Open("build/sled_db"), &gorm.Config{})
 
-	// open connection:
 	if err != nil {
 		panic(err)
 	}

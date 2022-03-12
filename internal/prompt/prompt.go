@@ -8,6 +8,9 @@ import (
 	"github.com/arvpyrna/sled/internal/repository"
 )
 
+const OPTIONS_PATH = "res/options.txt"
+const USER_MANUAL_PATH = "res/manual.txt"
+
 type Prompt interface {
 	ProcessUserInput()
 }
@@ -22,9 +25,6 @@ func NewPrompt(dao repository.DAO) Prompt {
 		dao:     dao,
 		handler: handler.NewHandler(dao)}
 }
-
-const OPTIONS_PATH = "res/options.txt"
-const USER_MANUAL_PATH = "res/manual.txt"
 
 func getContentsOfFile(filePath string) string {
 	options, err := os.ReadFile(filePath)

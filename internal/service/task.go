@@ -1,3 +1,5 @@
+// Service holds the reference to DAO to access database
+
 package service
 
 import (
@@ -10,7 +12,6 @@ type TaskService interface {
 	ListTask() []model.Task
 }
 
-// Service holds the reference to DAO to access database
 type taskService struct {
 	dao repository.DAO
 }
