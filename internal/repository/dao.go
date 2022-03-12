@@ -10,12 +10,13 @@ type DAO interface {
 
 // DAO - Data/Database access object
 
-type dao struct {
-	db *gorm.DB
-}
+var DB *gorm.DB
+
+type dao struct{}
 
 func NewDao(db *gorm.DB) DAO {
-	return &dao{db: db}
+	DB = db
+	return &dao{}
 }
 
 func (d *dao) NewTaskQuery() TaskQuery {

@@ -9,6 +9,6 @@ import (
 func main() {
 	db := db.Init()
 	dao := repository.NewDao(db)
-	prompt := prompt.NewPrompt(&dao)
+	prompt := prompt.NewPrompt(dao)
 	prompt.ProcessUserInput()
 }

@@ -6,18 +6,24 @@ import (
 	"os"
 	"time"
 
+	"github.com/arvpyrna/sled/internal/model"
 	"github.com/arvpyrna/sled/internal/repository"
+	"github.com/arvpyrna/sled/internal/service"
 	"github.com/schollz/progressbar/v3"
 )
+
+// Handler, perfroms user request, passed it on to relevant service
 
 type Handler interface {
 	HandleTaskCreation()
 	PerformCleanup()
 }
 
-type handler struct{ dao *repository.DAO }
+type handler struct {
+	dao repository.DAO
+}
 
-func NewHandler(dao *repository.DAO) Handler {
+func NewHandler(dao repository.DAO) Handler {
 	return &handler{dao: dao}
 }
 
@@ -37,7 +43,15 @@ func (h *handler) HandleTaskCreation() {
 	startTimer(duration)
 	// consider the task completed...
 	// create task after timer is done...
-	fmt.Println("Task is marked completed", title, desc)
+	taskService := service.NewTaskService(h.dao)
+
+	task := model.Task{
+		Title:       title,
+		Description: desc,
+		Duration:    duration,
+	}
+
+	taskService.CreateTask(task)
 }
 
 func (h *handler) PerformCleanup() {

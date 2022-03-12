@@ -14,10 +14,10 @@ type Prompt interface {
 
 type prompt struct {
 	handler handler.Handler
-	dao     *repository.DAO
+	dao     repository.DAO
 }
 
-func NewPrompt(dao *repository.DAO) Prompt {
+func NewPrompt(dao repository.DAO) Prompt {
 	return &prompt{
 		dao:     dao,
 		handler: handler.NewHandler(dao)}
