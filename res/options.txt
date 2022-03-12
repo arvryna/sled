@@ -1,3 +1,5 @@
+Welcome to Sled! Please choose an option:
+
 1) Create category
 2) Track task
 3) Search
@@ -6,4 +8,4 @@
 6) Manual
 7) Stop timer
 8) Pause timer
-9) Exit
+0) Exit

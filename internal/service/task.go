@@ -1,17 +1,28 @@
 package service
 
+import (
+	"github.com/arvpyrna/sled/internal/repository"
+	"github.com/transip/gotransip/v6/repository"
+)
+
 type TaskService interface {
 	CreateTask()
+	ListTask()
 }
 
-type typeService struct {
-	// Get copy of repository
+// Service holds the reference to DAO to access database
+type taskService struct {
+	dao *repository.DAO
 }
 
-func NewTaskService() TaskService {
-	return &typeService{}
+func NewTaskService(dao *repository.DAO) TaskService {
+	return &taskService{dao: dao}
 }
 
-func (t *typeService) CreateTask() {
+func (t *taskService) CreateTask() {
+
+}
+
+func (t *taskService) ListTask() {
 
 }

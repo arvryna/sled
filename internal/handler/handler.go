@@ -6,19 +6,22 @@ import (
 	"os"
 	"time"
 
+	"github.com/arvpyrna/sled/internal/repository"
 	"github.com/schollz/progressbar/v3"
 )
 
-func ShowOptions() {
-	options, err := os.ReadFile("res/options.txt")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(string(options))
-	fmt.Printf("\nChoose an option: ")
+type Handler interface {
+	HandleTaskCreation()
+	PerformCleanup()
 }
 
-func HandleTaskCreation() {
+type handler struct{ dao *repository.DAO }
+
+func NewHandler(dao *repository.DAO) Handler {
+	return &handler{dao: dao}
+}
+
+func (h *handler) HandleTaskCreation() {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter task Title: ")
 	title, _ := reader.ReadString('\n')
@@ -37,8 +40,8 @@ func HandleTaskCreation() {
 	fmt.Println("Task is marked completed", title, desc)
 }
 
-func PerformCleanup() {
-	fmt.Println("Quitting...")
+func (h *handler) PerformCleanup() {
+	fmt.Println("Closing app...")
 }
 
 // Timer with interactive progress bar
