@@ -8,6 +8,5 @@ type Task struct {
 	Description string
 	Duration    int // (in minutes)
 	CategoryId  int
-	TaskType    int
 	CreatedAt   time.Time
 }

@@ -21,4 +21,6 @@
 - Introduce a central server for data dump for teams
 - To generate invoice based on the time spent
 - Ability to add task without Timer
+- Make some noise or show notification once timer is done
+- Ability to send daily or weekly digest of how time was spent
 - Use Cobra lib to add multiple commands instead of using prompt
