@@ -24,3 +24,5 @@
 - Make some noise or show notification once timer is done
 - Ability to send daily or weekly digest of how time was spent
 - Use Cobra lib to add multiple commands instead of using prompt
+- Store only Date and Time in task creation
+- Ability to create template repeating task like, Performing exercises, Watching a specific lecture etc
