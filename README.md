@@ -14,6 +14,8 @@
 - Fine control over different config
 
 ## Todo:
+- Use cobra to add different commands, and use SIGINT to allow the pause timer feature and then let user continue
+  - his todo
 - Make the CLI more interactive
 - Ability to generate analytics using differnt charts 
 - Add a watch command to see a short summary of week progress
