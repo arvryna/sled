@@ -16,6 +16,7 @@ import (
 
 type Handler interface {
 	HandleTaskCreation()
+	HandleCategoryCreation()
 	PrintTasks()
 	PerformCleanup()
 	ResumeTask()
@@ -53,6 +54,20 @@ func (h *handler) HandleTaskCreation() {
 	}
 
 	taskService.CreateTask(task)
+}
+
+func (h *handler) HandleCategoryCreation() {
+	title := GetUserInput("Enter Category name: ")
+	desc := GetUserInput("Enter Category description: ")
+
+	category := model.Category{
+		Title:       title,
+		Description: desc,
+	}
+
+	// consider the task completed and create task after timer is done...
+	categoryService := service.NewCategoryService(h.dao)
+	categoryService.CreateCategory(&category)
 }
 
 func GetUserInput(prompt string) string {

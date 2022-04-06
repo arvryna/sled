@@ -1,8 +1,8 @@
 Welcome to Sled! Please choose an option:
 
-1) Create category
-2) Track task
-3) List tasks
+1) Track task
+2) List tasks
+3) Create category
 4) Export
 5) Send timesheet by Email
 6) Manual

@@ -13,8 +13,10 @@ import (
 	"gorm.io/gorm"
 )
 
+// Interface that holds functions that returns object that implements those interfaces
 type DAO interface {
 	NewTaskQuery() TaskQuery
+	NewCategoryQuery() CategoryQuery
 }
 
 var DB *gorm.DB
@@ -28,4 +30,8 @@ func NewDao(db *gorm.DB) DAO {
 
 func (d *dao) NewTaskQuery() TaskQuery {
 	return &taskQuery{}
+}
+
+func (d *dao) NewCategoryQuery() CategoryQuery {
+	return &categoryQuery{}
 }

@@ -50,10 +50,11 @@ func (p *prompt) ProcessUserInput() {
 
 		switch userInput {
 		case 1:
-		case 2:
 			p.handler.HandleTaskCreation()
-		case 3:
+		case 2:
 			p.handler.PrintTasks()
+		case 3:
+			p.handler.HandleCategoryCreation()
 		case 4:
 		case 5:
 		case 6:

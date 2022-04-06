@@ -13,6 +13,6 @@ func Init() *gorm.DB {
 		panic(err)
 	}
 
-	db.AutoMigrate(&model.Task{})
+	db.AutoMigrate(&model.Task{}, &model.Category{})
 	return db
 }
