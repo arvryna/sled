@@ -12,3 +12,5 @@
 - Ability to track time with a timer
 - Export data as CSV/JSON
 - Fine control over different config
+
+![sled-prompt](https://github.com/arvryna/sled/res/sled-prompt.png)

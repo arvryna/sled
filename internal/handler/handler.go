@@ -1,13 +1,11 @@
 package handler
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strconv"
-	"strings"
 	"time"
 
+	"github.com/arvryna/golib/pkg/utils"
 	"github.com/arvryna/sled/internal/model"
 	"github.com/arvryna/sled/internal/repository"
 	"github.com/arvryna/sled/internal/service"
@@ -31,16 +29,11 @@ func NewHandler(dao repository.DAO) Handler {
 }
 
 func (h *handler) HandleTaskCreation() {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter task Title: ")
-	title, _ := reader.ReadString('\n')
 
-	fmt.Print("Enter task Description: ")
-	desc, _ := reader.ReadString('\n')
-
-	fmt.Print("Enter task Duration (in minutes): ")
-	var duration int
-	fmt.Scanf("%d", &duration)
+	title := utils.GetUserInput("Enter Task title: ")
+	desc := utils.GetUserInput("Enter Task description: ")
+	categoryId, _ := strconv.Atoi(utils.GetUserInput("Enter Category ID: (For now enter 1 here): "))
+	duration, _ := strconv.Atoi(utils.GetUserInput("Enter task Duration (in minutes): "))
 
 	startTimer(duration)
 
@@ -51,14 +44,15 @@ func (h *handler) HandleTaskCreation() {
 		Title:       title,
 		Description: desc,
 		Duration:    duration,
+		CategoryId:  categoryId,
 	}
 
 	taskService.CreateTask(&task)
 }
 
 func (h *handler) HandleCategoryCreation() {
-	title := GetUserInput("Enter Category name: ")
-	desc := GetUserInput("Enter Category description: ")
+	title := utils.GetUserInput("Enter Category name: ")
+	desc := utils.GetUserInput("Enter Category description: ")
 
 	category := model.Category{
 		Title:       title,
@@ -68,13 +62,6 @@ func (h *handler) HandleCategoryCreation() {
 	// consider the task completed and create task after timer is done...
 	categoryService := service.NewCategoryService(h.dao)
 	categoryService.CreateCategory(&category)
-}
-
-func GetUserInput(prompt string) string {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print(prompt)
-	data, _ := reader.ReadString('\n')
-	return strings.TrimSpace(data)
 }
 
 func (h *handler) PrintTasks() {
@@ -91,10 +78,10 @@ func (h *handler) PrintTasks() {
 }
 
 func (h *handler) ResumeTask() {
-	taskId, _ := strconv.Atoi(GetUserInput("Please enter taskID: "))
+	taskId, _ := strconv.Atoi(utils.GetUserInput("Please enter taskID: "))
 	taskService := service.NewTaskService(h.dao)
 	task := taskService.GetTask(taskId)
-	duration, _ := strconv.Atoi(GetUserInput("How long you want to work more on this task ? (in minutes)"))
+	duration, _ := strconv.Atoi(utils.GetUserInput("How long you want to work more on this task ? (in minutes)"))
 	startTimer(duration)
 	task.Duration = task.Duration + duration
 	taskService.UpdateTask(&task)
