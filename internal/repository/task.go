@@ -7,15 +7,15 @@ import (
 )
 
 type TaskQuery interface {
-	CreateTask(task model.Task)
+	CreateTask(task *model.Task)
 	ListTasks() []model.Task
 	GetTask(taskId int) model.Task
-	UpdateTask(task model.Task)
+	UpdateTask(task *model.Task)
 }
 
 type taskQuery struct{}
 
-func (t *taskQuery) CreateTask(task model.Task) {
+func (t *taskQuery) CreateTask(task *model.Task) {
 	if res := DB.Create(&task); res.Error != nil {
 		fmt.Println("Can't create task", res.Error)
 	} else {
@@ -37,6 +37,6 @@ func (t *taskQuery) ListTasks() []model.Task {
 	return tasks
 }
 
-func (t *taskQuery) UpdateTask(task model.Task) {
+func (t *taskQuery) UpdateTask(task *model.Task) {
 	DB.Save(task)
 }

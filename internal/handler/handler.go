@@ -53,7 +53,7 @@ func (h *handler) HandleTaskCreation() {
 		Duration:    duration,
 	}
 
-	taskService.CreateTask(task)
+	taskService.CreateTask(&task)
 }
 
 func (h *handler) HandleCategoryCreation() {
@@ -97,7 +97,7 @@ func (h *handler) ResumeTask() {
 	duration, _ := strconv.Atoi(GetUserInput("How long you want to work more on this task ? (in minutes)"))
 	startTimer(duration)
 	task.Duration = task.Duration + duration
-	taskService.UpdateTask(task)
+	taskService.UpdateTask(&task)
 }
 
 func (h *handler) PerformCleanup() {

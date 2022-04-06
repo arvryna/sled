@@ -12,10 +12,10 @@ import (
 )
 
 type TaskService interface {
-	CreateTask(task model.Task)
+	CreateTask(task *model.Task)
 	ListTask() []model.Task
 	GetTask(taskId int) model.Task
-	UpdateTask(task model.Task)
+	UpdateTask(task *model.Task)
 }
 
 type taskService struct {
@@ -26,7 +26,7 @@ func NewTaskService(dao repository.DAO) TaskService {
 	return &taskService{dao: dao}
 }
 
-func (t *taskService) CreateTask(task model.Task) {
+func (t *taskService) CreateTask(task *model.Task) {
 	t.dao.NewTaskQuery().CreateTask(task)
 }
 
@@ -38,6 +38,6 @@ func (t *taskService) GetTask(taskId int) model.Task {
 	return t.dao.NewTaskQuery().GetTask(taskId)
 }
 
-func (t *taskService) UpdateTask(task model.Task) {
+func (t *taskService) UpdateTask(task *model.Task) {
 	t.dao.NewTaskQuery().UpdateTask(task)
 }
