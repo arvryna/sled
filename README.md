@@ -13,4 +13,5 @@
 - Export data as CSV/JSON
 - Fine control over different config
 
+## Usage:
 ![sled-prompt](https://github.com/arvryna/sled/blob/main/res/sled-prompt.png)
