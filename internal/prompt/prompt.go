@@ -58,6 +58,8 @@ func (p *prompt) ProcessUserInput() {
 		case 5:
 		case 6:
 			fmt.Println(getContentsOfFile(USER_MANUAL_PATH))
+		case 9:
+			p.handler.ResumeTask()
 		case 0:
 			p.handler.PerformCleanup()
 			os.Exit(0)

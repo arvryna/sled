@@ -1,4 +1,8 @@
-// Service holds the reference to DAO to access database
+/*
+   Service Layer
+   - Contains access to DAO
+   - Businesss logic is written here
+*/
 
 package service
 
@@ -10,6 +14,8 @@ import (
 type TaskService interface {
 	CreateTask(task model.Task)
 	ListTask() []model.Task
+	GetTask(taskId int) model.Task
+	UpdateTask(task model.Task)
 }
 
 type taskService struct {
@@ -26,4 +32,12 @@ func (t *taskService) CreateTask(task model.Task) {
 
 func (t *taskService) ListTask() []model.Task {
 	return t.dao.NewTaskQuery().ListTasks()
+}
+
+func (t *taskService) GetTask(taskId int) model.Task {
+	return t.dao.NewTaskQuery().GetTask(taskId)
+}
+
+func (t *taskService) UpdateTask(task model.Task) {
+	t.dao.NewTaskQuery().UpdateTask(task)
 }

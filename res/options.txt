@@ -8,4 +8,5 @@ Welcome to Sled! Please choose an option:
 6) Manual
 7) Stop timer
 8) Pause timer
+9) Resume task
 0) Exit

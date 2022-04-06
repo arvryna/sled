@@ -4,6 +4,7 @@
  * other classes to keep the DB loosely coupled
  * We have used SQlite in this project, but can be safely moved to any database
  * by just changing the Init function of the db.go file
+ * DAO does not know about Service layer
  */
 
 package repository

@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/arvpyrna/sled/internal/model"
@@ -16,6 +18,7 @@ type Handler interface {
 	HandleTaskCreation()
 	PrintTasks()
 	PerformCleanup()
+	ResumeTask()
 }
 
 type handler struct {
@@ -52,6 +55,13 @@ func (h *handler) HandleTaskCreation() {
 	taskService.CreateTask(task)
 }
 
+func GetUserInput(prompt string) string {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print(prompt)
+	data, _ := reader.ReadString('\n')
+	return strings.TrimSpace(data)
+}
+
 func (h *handler) PrintTasks() {
 	results := service.NewTaskService(h.dao).ListTask()
 	if len(results) > 0 {
@@ -63,6 +73,16 @@ func (h *handler) PrintTasks() {
 		fmt.Print(fmt.Sprintf("\n%d-%s", task.Id, task.Title))
 	}
 	fmt.Println("\n----- End -----")
+}
+
+func (h *handler) ResumeTask() {
+	taskId, _ := strconv.Atoi(GetUserInput("Please enter taskID: "))
+	taskService := service.NewTaskService(h.dao)
+	task := taskService.GetTask(taskId)
+	duration, _ := strconv.Atoi(GetUserInput("How long you want to work more on this task ? (in minutes)"))
+	startTimer(duration)
+	task.Duration = task.Duration + duration
+	taskService.UpdateTask(task)
 }
 
 func (h *handler) PerformCleanup() {
