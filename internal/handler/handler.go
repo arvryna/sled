@@ -38,10 +38,9 @@ func (h *handler) HandleTaskCreation() {
 	var duration int
 	fmt.Scanf("%d", &duration)
 
-	// get input for task
 	startTimer(duration)
-	// consider the task completed...
-	// create task after timer is done...
+
+	// consider the task completed and create task after timer is done...
 	taskService := service.NewTaskService(h.dao)
 
 	task := model.Task{
