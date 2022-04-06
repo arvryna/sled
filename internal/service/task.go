@@ -7,8 +7,8 @@
 package service
 
 import (
-	"github.com/arvpyrna/sled/internal/model"
-	"github.com/arvpyrna/sled/internal/repository"
+	"github.com/arvryna/sled/internal/model"
+	"github.com/arvryna/sled/internal/repository"
 )
 
 type TaskService interface {

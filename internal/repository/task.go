@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 
-	"github.com/arvpyrna/sled/internal/model"
+	"github.com/arvryna/sled/internal/model"
 )
 
 type TaskQuery interface {

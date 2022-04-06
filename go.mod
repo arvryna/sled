@@ -1,4 +1,4 @@
-module github.com/arvpyrna/sled
+module github.com/arvryna/sled
 
 go 1.17
 

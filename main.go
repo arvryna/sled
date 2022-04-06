@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/arvpyrna/sled/internal/db"
-	"github.com/arvpyrna/sled/internal/prompt"
-	"github.com/arvpyrna/sled/internal/repository"
+	"github.com/arvryna/sled/internal/db"
+	"github.com/arvryna/sled/internal/prompt"
+	"github.com/arvryna/sled/internal/repository"
 )
 
 func main() {

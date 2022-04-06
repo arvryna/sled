@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/arvpyrna/sled/internal/handler"
-	"github.com/arvpyrna/sled/internal/repository"
+	"github.com/arvryna/sled/internal/handler"
+	"github.com/arvryna/sled/internal/repository"
 )
 
 const OPTIONS_PATH = "res/options.txt"

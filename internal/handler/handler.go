@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/arvpyrna/sled/internal/model"
-	"github.com/arvpyrna/sled/internal/repository"
-	"github.com/arvpyrna/sled/internal/service"
+	"github.com/arvryna/sled/internal/model"
+	"github.com/arvryna/sled/internal/repository"
+	"github.com/arvryna/sled/internal/service"
 	"github.com/schollz/progressbar/v3"
 )
 

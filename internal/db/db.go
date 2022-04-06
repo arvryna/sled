@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/arvpyrna/sled/internal/model"
+	"github.com/arvryna/sled/internal/model"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
