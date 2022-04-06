@@ -29,10 +29,10 @@ func NewHandler(dao repository.DAO) Handler {
 }
 
 func (h *handler) HandleTaskCreation() {
-
 	title := utils.GetUserInput("Enter Task title: ")
 	desc := utils.GetUserInput("Enter Task description: ")
-	categoryId, _ := strconv.Atoi(utils.GetUserInput("Enter Category ID: (For now enter 1 here): "))
+	categoryId, _ := strconv.Atoi(utils.GetUserInput("Enter Category ID: (OPTIONAL): "))
+	externalLink := utils.GetUserInput("Enter external link eg: Asana, Jira etc(OPTIONAL): ")
 	duration, _ := strconv.Atoi(utils.GetUserInput("Enter task Duration (in minutes): "))
 
 	startTimer(duration)
@@ -41,10 +41,11 @@ func (h *handler) HandleTaskCreation() {
 	taskService := service.NewTaskService(h.dao)
 
 	task := model.Task{
-		Title:       title,
-		Description: desc,
-		Duration:    duration,
-		CategoryId:  categoryId,
+		Title:        title,
+		Description:  desc,
+		Duration:     duration,
+		ExternalLink: externalLink,
+		CategoryId:   categoryId,
 	}
 
 	taskService.CreateTask(&task)

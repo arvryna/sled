@@ -1,5 +1,5 @@
 # Sled - Time management for Geeks
-- A CLI alternative to [Harvest](getharvest.com), provides interactive time tracking
+- A CLI alternative to [Harvest](https://www.getharvest.com/), provides interactive time tracking
 - Provides a way to create and manage timesheet to share with your employers or to track for personal tracking
 - Ability to analyse how you spend your time, to make a summary of how your day was, and to reflect how the time was spent to a finer detail
 - Code is written with [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles
