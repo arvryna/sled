@@ -8,9 +8,6 @@ import (
 	"github.com/arvryna/sled/internal/repository"
 )
 
-const OPTIONS_PATH = "res/options.txt"
-const USER_MANUAL_PATH = "res/manual.txt"
-
 type Prompt interface {
 	ProcessUserInput()
 }
@@ -26,16 +23,8 @@ func NewPrompt(dao repository.DAO) Prompt {
 		handler: handler.NewHandler(dao)}
 }
 
-func getContentsOfFile(filePath string) string {
-	options, err := os.ReadFile(filePath)
-	if err != nil {
-		panic(err)
-	}
-	return string(options)
-}
-
 func showOptions() {
-	fmt.Println("\n" + getContentsOfFile(OPTIONS_PATH))
+	fmt.Println("\n" + getOptions())
 	fmt.Printf("\nChoose an option: ")
 }
 
@@ -58,7 +47,6 @@ func (p *prompt) ProcessUserInput() {
 		case 4:
 		case 5:
 		case 6:
-			fmt.Println(getContentsOfFile(USER_MANUAL_PATH))
 		case 9:
 			p.handler.ResumeTask()
 		case 0:
@@ -66,4 +54,18 @@ func (p *prompt) ProcessUserInput() {
 			os.Exit(0)
 		}
 	}
+}
+
+func getOptions() string {
+	return `Welcome to Sled! Please choose an option:
+1) Track task
+2) List tasks
+3) Create category
+4) Export
+5) Send timesheet by Email
+6) Manual
+7) Stop timer
+8) Pause timer
+9) Resume task
+0) Exit `
 }

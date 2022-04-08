@@ -1,8 +1,0 @@
-# --------------- SLED USER MANUAL -----------------
-
-# Config
-- In config one can provide various options like sending email via SMTP
-
-# Location of DB
-- DB is located in the build folder, which you need to look for to back-up your DB on your own
-- DB is not encrypted by default but can be easily encrypted, since it is just a single file
