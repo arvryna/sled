@@ -10,6 +10,8 @@
 package repository
 
 import (
+	"fmt"
+
 	"gorm.io/gorm"
 )
 
@@ -17,6 +19,7 @@ import (
 type DAO interface {
 	NewTaskQuery() TaskQuery
 	NewCategoryQuery() CategoryQuery
+	CloseDBConnection()
 }
 
 var DB *gorm.DB
@@ -34,4 +37,12 @@ func (d *dao) NewTaskQuery() TaskQuery {
 
 func (d *dao) NewCategoryQuery() CategoryQuery {
 	return &categoryQuery{}
+}
+
+func (d *dao) CloseDBConnection() {
+	db, err := DB.DB()
+	if err == nil {
+		fmt.Println("DB Connection is closed..")
+	}
+	db.Close()
 }

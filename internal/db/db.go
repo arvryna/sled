@@ -1,8 +1,6 @@
 package db
 
 import (
-	"fmt"
-
 	"github.com/arvryna/sled/internal/model"
 	"github.com/arvryna/sled/internal/utils"
 	"gorm.io/driver/sqlite"
@@ -17,8 +15,6 @@ func Init() *gorm.DB {
 
 	if err := utils.CreateFolderIfNotExist(path); err != nil {
 		panic(err)
-	} else {
-		fmt.Println("Initializing Sled files here: (path with DB) \n", SLED_DIR_PATH)
 	}
 
 	dbPath := SLED_DIR_PATH + "/" + SLED_DB_PATH

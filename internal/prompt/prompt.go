@@ -50,7 +50,7 @@ func (p *prompt) ProcessUserInput() {
 		case 9:
 			p.handler.ResumeTask()
 		case 0:
-			p.handler.PerformCleanup()
+			p.handler.HandleGracefulShutdown()
 			os.Exit(0)
 		}
 	}

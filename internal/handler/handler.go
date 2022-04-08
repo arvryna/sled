@@ -16,8 +16,8 @@ type Handler interface {
 	HandleTaskCreation()
 	HandleCategoryCreation()
 	PrintTasks()
-	PerformCleanup()
 	ResumeTask()
+	HandleGracefulShutdown()
 }
 
 type handler struct {
@@ -88,10 +88,6 @@ func (h *handler) ResumeTask() {
 	taskService.UpdateTask(&task)
 }
 
-func (h *handler) PerformCleanup() {
-	fmt.Println("Closing app...")
-}
-
 // Timer with interactive progress bar
 // Gets input in minute but shows progress bar in the unit of seconds
 func startTimer(minutes int) {
@@ -102,4 +98,9 @@ func startTimer(minutes int) {
 		bar.Add(1)
 		time.Sleep(1 * time.Second)
 	}
+}
+
+func (h *handler) HandleGracefulShutdown() {
+	h.dao.CloseDBConnection()
+	fmt.Println("Shutting down..")
 }
