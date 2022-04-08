@@ -5,7 +5,7 @@
 - Code is written with [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles
 
 ## Features:
-- All data is stored as SQLite file in `build/sled_db` folder, can be quickly explored using [SQlite](https://sqlitebrowser.org/) browser
+- All data is stored as SQLite file in `~/.sled/sled_db` folder, can be quickly explored using [SQlite](https://sqlitebrowser.org/) browser
 - Can be configured to generate weekly/monthly timesheet and auto-email as report
 - Ability to track time with a timer
 - Export data as CSV/JSON
