@@ -9,6 +9,7 @@ import (
 	"github.com/arvryna/sled/internal/model"
 	"github.com/arvryna/sled/internal/repository"
 	"github.com/arvryna/sled/internal/service"
+	"github.com/manifoldco/promptui"
 	"github.com/schollz/progressbar/v3"
 )
 
@@ -31,7 +32,7 @@ func NewHandler(dao repository.DAO) Handler {
 func (h *handler) HandleTaskCreation() {
 	title := utils.GetUserInput("Enter Task title: ")
 	desc := utils.GetUserInput("Enter Task description: ")
-	categoryId, _ := strconv.Atoi(utils.GetUserInput("Enter Category ID: (OPTIONAL): "))
+	categoryId := h.getCategoryID()
 	externalLink := utils.GetUserInput("Enter external link eg: Asana, Jira etc(OPTIONAL): ")
 	duration, _ := strconv.Atoi(utils.GetUserInput("Enter task Duration (in minutes): "))
 
@@ -103,4 +104,27 @@ func startTimer(minutes int) {
 func (h *handler) HandleGracefulShutdown() {
 	h.dao.CloseDBConnection()
 	fmt.Println("Shutting down..")
+}
+
+func (h *handler) getCategoryID() int {
+	categoryService := service.NewCategoryService(h.dao)
+
+	categories := categoryService.GetAllCategories()
+
+	templates := &promptui.SelectTemplates{
+		Label:    "{{ . }}?",
+		Active:   "\U0001F336 {{ .Title | cyan }}",
+		Inactive: "  {{ .Title | cyan }}",
+		Selected: "\U0001F336 {{ .Title | red | cyan }}",
+	}
+
+	prompt := promptui.Select{
+		Label:     "Choose category ID: ",
+		Items:     categories,
+		Templates: templates,
+		Size:      4,
+	}
+
+	i, _, _ := prompt.Run()
+	return categories[i].Id
 }

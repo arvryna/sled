@@ -7,6 +7,7 @@ import (
 
 type CategoryService interface {
 	CreateCategory(category *model.Category) error
+	GetAllCategories() []model.Category
 }
 
 type categoryservice struct {
@@ -22,4 +23,8 @@ func (c *categoryservice) CreateCategory(category *model.Category) error {
 		return err
 	}
 	return nil
+}
+
+func (c *categoryservice) GetAllCategories() []model.Category {
+	return c.dao.NewCategoryQuery().GetAllCategories()
 }

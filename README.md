@@ -17,3 +17,6 @@
 
 ### How can i make DB migrations if i make changes to Entity ?
 - If you wanted to make changes to DB, sled comes with gorm and automigration enabled, simply change the required fields in Entity/add new ones, restart the application, db will be auto-migrated. NOTE: Gorm can add new columns, entities, change existing types, but as of version `Gorm v1.23.2`, existing columns can't be deleted. So if a perfect migration is important to you, then you need to write manual migrations. In future i would add scripts and flows for it.
+
+### How can i backup my data ?
+- Database is located in `~/.sled` folder, you can manually copy it, or you can run the `script/bkp-d.sh` after configuring the correct path backup inside the script

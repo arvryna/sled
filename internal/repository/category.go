@@ -8,6 +8,7 @@ import (
 
 type CategoryQuery interface {
 	CreateCategory(category *model.Category) error
+	GetAllCategories() []model.Category
 }
 
 type categoryQuery struct{}
@@ -20,4 +21,10 @@ func (c *categoryQuery) CreateCategory(category *model.Category) error {
 		fmt.Println("Task Created Successfully!")
 	}
 	return nil
+}
+
+func (c *categoryQuery) GetAllCategories() []model.Category {
+	var results []model.Category
+	DB.Find(&results)
+	return results
 }
