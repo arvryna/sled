@@ -2,6 +2,8 @@ package handler
 
 import (
 	"fmt"
+	"os/exec"
+	"runtime"
 	"strconv"
 	"time"
 
@@ -98,6 +100,17 @@ func startTimer(minutes int) {
 	for i := 0; i < durationInSec; i++ {
 		bar.Add(1)
 		time.Sleep(1 * time.Second)
+	}
+	msg := fmt.Sprintf("Task is completed, Duration: %d minutes", minutes)
+	publishDesktopNotification(msg)
+}
+
+func publishDesktopNotification(msg string) {
+	msg = "Sled: " + msg
+	if runtime.GOOS == "linux" {
+		if err := exec.Command("notify-send", msg).Run(); err != nil {
+			fmt.Println("could not send notification", err)
+		}
 	}
 }
 
