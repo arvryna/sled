@@ -25,6 +25,6 @@ func (c *categoryQuery) CreateCategory(category *model.Category) error {
 
 func (c *categoryQuery) GetAllCategories() []model.Category {
 	var results []model.Category
-	DB.Find(&results)
+	DB.Order("created_at desc").Find(&results)
 	return results
 }
