@@ -38,9 +38,8 @@ func (h *handler) HandleTaskCreation() {
 	externalLink := utils.GetUserInput("Enter external link eg: Asana, Jira etc(OPTIONAL): ")
 	duration, _ := strconv.Atoi(utils.GetUserInput("Enter task Duration (in minutes): "))
 
-	startTimer(duration)
+	startTimer(duration) // Blocked call
 
-	// consider the task completed and create task after timer is done...
 	taskService := service.NewTaskService(h.dao)
 
 	task := model.Task{
@@ -51,7 +50,11 @@ func (h *handler) HandleTaskCreation() {
 		CategoryId:   categoryId,
 	}
 
+	// consider the task completed and create task after timer is done...
 	taskService.CreateTask(&task)
+
+	msg := fmt.Sprintf("Task #%d is completed, Took: %d min", task.Id, duration)
+	publishDesktopNotification(msg)
 }
 
 func (h *handler) HandleCategoryCreation() {
@@ -85,10 +88,13 @@ func (h *handler) ResumeTask() {
 	taskId, _ := strconv.Atoi(utils.GetUserInput("Please enter taskID: "))
 	taskService := service.NewTaskService(h.dao)
 	task := taskService.GetTask(taskId)
-	duration, _ := strconv.Atoi(utils.GetUserInput("How long you want to work more on this task ? (in minutes)"))
+	duration, _ := strconv.Atoi(utils.GetUserInput("How long you want to work more on this task ? (in minutes): "))
 	startTimer(duration)
 	task.Duration = task.Duration + duration
 	taskService.UpdateTask(&task)
+
+	msg := fmt.Sprintf("Task #%d is completed, Took: %d min", task.Id, duration)
+	publishDesktopNotification(msg)
 }
 
 // Timer with interactive progress bar
@@ -101,8 +107,6 @@ func startTimer(minutes int) {
 		bar.Add(1)
 		time.Sleep(1 * time.Second)
 	}
-	msg := fmt.Sprintf("Task is completed, Duration: %d minutes", minutes)
-	publishDesktopNotification(msg)
 }
 
 func publishDesktopNotification(msg string) {
@@ -111,6 +115,8 @@ func publishDesktopNotification(msg string) {
 		if err := exec.Command("notify-send", msg).Run(); err != nil {
 			fmt.Println("could not send notification", err)
 		}
+	} else {
+		fmt.Println("Notification not supported yet for this platform (contact dev)", runtime.GOOS)
 	}
 }
 

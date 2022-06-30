@@ -35,6 +35,7 @@ func (p *prompt) ProcessUserInput() {
 		_, err := fmt.Scanf("%d", &userInput)
 		if err != nil {
 			fmt.Println("Error: Please enter a valid digit")
+			continue
 		}
 
 		switch userInput {
@@ -44,14 +45,13 @@ func (p *prompt) ProcessUserInput() {
 			p.handler.PrintTasks()
 		case 3:
 			p.handler.HandleCategoryCreation()
-		case 4:
-		case 5:
-		case 6:
 		case 9:
 			p.handler.ResumeTask()
 		case 0:
 			p.handler.HandleGracefulShutdown()
 			os.Exit(0)
+		default:
+			fmt.Println("Option not supported, please choose a different one")
 		}
 	}
 }
